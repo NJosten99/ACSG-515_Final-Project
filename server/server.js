@@ -1,18 +1,15 @@
 const express = require('express');
+const session = require('express-session');
+const mongoSessionStore = require('connect-mongo');
 const next = require('next');
-const mongoose = require("mongoose");
-const routes = require("./routes");
+const mongoose = require('mongoose');
+
+const setupGoogle = require('./google');
 
 require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
-
-/*
-*This variable contains my mongoDB URL.  I realize this contains my user name and password, but I didn't have
-*time to deploy this to a server.  Also, I thought you would appreciate not having to hook up your own mongoDB
-*database. 
-*/
-const MONGO_URL = 'mongodb+srv://NJosten99:b29tc4wAMDB@cluster0.uxonuvl.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URL = process.env.MONGO_URL;
 
 const options = {
   useNewUrlParser: true,
@@ -22,7 +19,7 @@ const options = {
 };
 mongoose.connect(MONGO_URL, options);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const ROOT_URL = `http://localhost:${port}`;
 
 const app = next({ dev });
@@ -31,15 +28,32 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  server.use(express.json());
-  server.use("/api", routes);
-  server.use(express.urlencoded({ extended: true }));
+  const MongoStore = mongoSessionStore(session);
+  const sess = {
+    name: process.env.SESSION_NAME,
+    secret: process.env.SESSION_SECRET,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 14 * 24 * 60 * 60, // save session 14 days
+    }),
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
+      domain: 'localhost',
+    },
+  };
+
+  server.use(session(sess));
+
+  setupGoogle({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));
 
   // starting express server
   server.listen(port, (err) => {
     if (err) throw err;
-    console.log(`> Ready on ${ROOT_URL}`);
+    console.log(`> Ready on ${ROOT_URL}`); // eslint-disable-line no-console
   });
 });

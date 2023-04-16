@@ -87,15 +87,22 @@ function Index() {
     /*
     *This function is used to refresh the "Items in Collection" section.  I call this after every add,
     *delete, and in-line edit to item totals.  Regarding planned features, this would have also been used
-    *in doing other in-line edit functions and loading other tables.
+    *in doing other in-line edit functions and loading other tables.  Originally, I called the function again
+    *in the lest .then().  In hindsight I have no idea why I decided to do this, but I think it may have
+    *been a temporary fix for an issue relating to need to click a button twice to acutalize a change.  I 
+    *realized my issue when I noticed a memory leak in my task manager.  However, I was still left with this
+    *problem, so I decided to run the function internals twice with a for loop.  I'm reading that this probably 
+    *has something to do with my state variables, so I will pursue fixing this issue.
     */
     function itemArrayRefresh() {
-      fetch('http://localhost:3000/api/items')
-      .then(response => response.json())
-      .then(item => {
-        setItemList(item);
-        itemArrayRefresh();
-      });
+      for (let i = 0; i < 2; i++) {
+        fetch('http://localhost:3000/api/items')
+        .then(response => response.json())
+        .then(item => {
+          setItemList(item);
+          //This is where I orginally called "itemArrayRefresh()"
+        });
+      };
     }
 
     /****************************************************************************/
@@ -144,6 +151,7 @@ function Index() {
         },
         body: JSON.stringify({ total: inLineTotal}),
       });
+      itemArrayRefresh();
       itemArrayRefresh();
     }
 

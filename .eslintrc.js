@@ -5,7 +5,7 @@ module.exports = {
     browser: true,
     jest: true,
   },
-  plugins: ['react', 'jsx-a11y', 'import', 'prettier'],
+  plugins: ['react', 'next', 'jsx-a11y', 'import', 'prettier'],
   rules: {
     'prettier/prettier': [
       'error',

@@ -17,6 +17,8 @@ class MyDocument extends Document {
     // Render app and page and get the context of the page with collected side effects.
     const originalRenderPage = ctx.renderPage;
 
+    // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
+    // However, be aware that it can have global side effects.
     const cache = createCache({
       key: 'css',
       prepend: true,
@@ -30,7 +32,8 @@ class MyDocument extends Document {
       });
 
     const initialProps = await Document.getInitialProps(ctx);
-
+    // This is important. It prevents emotion to render invalid HTML.
+    // See https://github.com/mui-org/material-ui/issues/26561#issuecomment-855286153
     const chunks = extractCriticalToChunks(initialProps.html);
 
     const emotionStyleTags = chunks.styles.map((style) => (
@@ -56,6 +59,18 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta name="google" content="notranslate" />
           <meta name="theme-color" content="#1976D2" />
+
+
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400:latin"
+          />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link
+            rel="stylesheet"
+            href="https://storage.googleapis.com/builderbook/nprogress.min.css"
+          />
+          <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
 
           <style>
             {`

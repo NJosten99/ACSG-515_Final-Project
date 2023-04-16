@@ -2,6 +2,7 @@ const express = require('express');
 const next = require('next');
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -32,6 +33,7 @@ app.prepare().then(() => {
   const server = express();
 
   server.use(express.json());
+  server.use(cors());
   server.use("/api", routes);
   server.use(express.urlencoded({ extended: true }));
 

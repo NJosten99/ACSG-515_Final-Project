@@ -9,9 +9,8 @@ with the "npm install" command while in the project root folder. You can install
 this guide: https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable 
 Also, in my testing, I've needed to manually install nodemon on new machines. To install nodemon, you can run the following command: npm install -g nodemon
 
-HOW TO LAUNCH: The first order of business is to download the project from GitHub. After doing so, you should use you command line to 
-navigate to the root of the project.
-When there, type "yarn dev". This should launch the local server. If the launch was successful, go into a browser of your choice and 
+HOW TO LAUNCH: The first order of business is to download the project from GitHub. After doing so, you should use you command line to navigate to the root 
+of the project.  When there, type "yarn dev". This should launch the local server. If the launch was successful, go into a browser of your choice and 
 enter "http://localhost:3000". When the page loads up, you may need to wait a second (or refresh the page) for the items in 
 the "Items in Collection" section to be fetched. However, this may be unnecessary.
 
@@ -22,8 +21,8 @@ HOW TO USE: The features of Major Domo are as follows: you can see the item mong
 remove items from the mongoDB collection, export the collection to a CSV or JSON file, and decrement/increment the inline total for each 
 item. All updates to items update the collection and are then reflected on the client side.
 
-To input an item, enter the name of the item in the form that reads "Item Title, enter the expiration data in the form that 
-reads "Expiration Date, and decide the amount of the item to add to the collection by clicking the buttons that read "-1" and "+1". The prior 
+To input an item, enter the name of the item in the form that reads *Item Title*, enter the expiration date in the form that 
+reads *Expiration Date*, and decide the amount of the item to add to the collection by clicking the buttons that read "-1" and "+1". The prior 
 subtracts one, and the latter adds one to the input total.
 
 To export the collection, click the button that says "EXPORT". You should then be shown a menu of two buttons that read "Export to CSV" 

@@ -12,9 +12,10 @@ Also, in my testing, I've sometimes needed to manually install nodemon on new ma
 command: npm install -g nodemon
 
 HOW TO LAUNCH: The first order of business is to download the project from GitHub.  My final submission is located on branch Sprint2.  You will need to extract 
-the project from the zip file.  After doing so, you should use your command line to navigate to the root of the project.  When there, type "yarn dev". This should 
-launch the local server. If the launch was successful, go into a browser of your choice and enter "http://localhost:3000". When the page loads up, you may 
-need to wait a second (or refresh the page) for the items in the "Items in Collection" section to be fetched. However, this may be unnecessary.
+the project from the zip file.  After doing so, you should use your command line to navigate to the root of the project.  When there, type "npm install" to install
+modules.  When any downloads have completed, type "yarn dev". This should launch the local server. If the launch was successful, go into a browser of your choice
+and enter "http://localhost:3000". When the page loads up, you may need to wait a second (or refresh the page) for the items in the "Items in Collection" section
+to be fetched. However, this may be unnecessary.
 
 LAUNCH QUICK GUIDE: 
 Download project (branch titled Sprint2) -> Extract project from zip file -> Open console -> Navigate to project root directory -> Run command: npm install -> 

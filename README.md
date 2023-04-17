@@ -15,6 +15,9 @@ When there, type "yarn dev". This should launch the local server. If the launch 
 enter "http://localhost:3000". When the page loads up, you may need to wait a second (or refresh the page) for the items in 
 the "Items in Collection" section to be fetched. However, this may be unnecessary.
 
+LAUNCH QUICK GUIDE: 
+Download project -> Open console -> Navigate to project root directory -> Run command: npm install -> Run command: yarn dev -> Open browser -> Navigate to http://localhost:3000
+
 HOW TO USE: The features of Major Domo are as follows: you can see the item mongoDB collection, add items to the mongoDB collection, 
 remove items from the mongoDB collection, export the collection to a CSV or JSON file, and decrement/increment the inline total for each 
 item. All updates to items update the collection and are then reflected on the client side.

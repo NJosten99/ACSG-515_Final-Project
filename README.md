@@ -7,7 +7,7 @@ in-line edit function, but ran out of time.
 
 NOTE: 
 You may need to download nodemon, yarn, and some modules.  However, I believe most, if not all, of the modules can be downloaded with the "npm install" command
-while in the project root folder.
+while in the project root folder.  You can install yarn using this guide: https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable 
 
 HOW TO LAUNCH:
 The first order of business is to download the project from GitHub.  After doing so, you should use you command line to navigate to the root of the project.  

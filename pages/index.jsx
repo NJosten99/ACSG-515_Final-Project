@@ -121,6 +121,7 @@ function Index() {
         },
         body: JSON.stringify({ name: itemName, expiration: expireDate, total: inputTotal }),
       });
+      itemArrayRefresh();
     }
 
     //This function is used to delete items.  These items are identified by their _id value.
@@ -134,7 +135,9 @@ function Index() {
     /*
     *This function is used to update the inline total value.  The function take the object and
     *and a boolean value.  The boolean is used to determine whether the user clicked the 
-    *-1 or +1 button.  Depending on the button click, 1 is subtracted or added. 
+    *-1 or +1 button.  Depending on the button click, 1 is subtracted or added.  Also, I don't
+    *like having two calls to itemArrayRefresh at the end, but I was unable to find an timely
+    *alternative.
     */
     function updateInLineTotal(props, neg) {
       let inLineTotal = props.total;

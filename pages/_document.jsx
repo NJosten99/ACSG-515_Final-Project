@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 import React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import PropTypes from 'prop-types';
@@ -14,7 +13,6 @@ const propTypes = {
 
 class MyDocument extends Document {
   static getInitialProps = async (ctx) => {
-    // Render app and page and get the context of the page with collected side effects.
     const originalRenderPage = ctx.renderPage;
 
     const cache = createCache({
@@ -25,7 +23,6 @@ class MyDocument extends Document {
 
     ctx.renderPage = () =>
       originalRenderPage({
-        // eslint-disable-next-line react/display-name
         enhanceApp: (App) => (props) => <App emotionCache={cache} {...props} />,
       });
 
@@ -37,14 +34,12 @@ class MyDocument extends Document {
       <style
         data-emotion={`${style.key} ${style.ids.join(' ')}`}
         key={style.key}
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: style.css }}
       />
     ));
 
     return {
       ...initialProps,
-      // Styles fragment is rendered after the app and page rendering finish.
       styles: [...React.Children.toArray(initialProps.styles), ...emotionStyleTags],
     };
   };
